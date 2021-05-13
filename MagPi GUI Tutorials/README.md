@@ -3,4 +3,6 @@ These tutorials come from the MagPi magazine and from the Create Graphical User 
 
 They require **guizero** being installed
 this can be done with
-`pip install guizero`
+```
+pip install guizero
+```
