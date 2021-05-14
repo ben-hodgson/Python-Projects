@@ -36,7 +36,7 @@ label2 = tk.Label(root, text="Choose an Operation", width=25, bg='MediumPurple1'
 label2.config(font=bold_font)
 canvas.create_window(200, 200, window=label2)
 
-v - tk.IntVar()
+v = tk.IntVar()
 
 def choice():
     x = v.get()
@@ -75,6 +75,17 @@ def decryption():
     label4.config(font=bold_font)
     canvas.create_window(200, 350, window=label4)
 
+label5 = tk.Radiobutton(root, text="Encryption", padx=20, variable=v, value=1, command=choice, bg='light yellow')
+label5.config(font=bold_font)
+canvas.create_window(100, 250, window=label5)
+
+label6 = tk.Radiobutton(root, text="Decryption", padx=20, variable=v, value=2, command=choice, bg='light yellow')
+label6.config(font=bold_font)
+canvas.create_window(300, 250, window=label6)
+
+label7 = tk.Label(root, text="Converted Text", width=20, bg='MediumPurple1')
+label7.config(font=bold_font)
+canvas.create_window(200, 300, window=label7)
 
 #########################################
 ##              display                ##
