@@ -6,8 +6,8 @@ import network
 import socket
 import dht
 
-ssid = 'VM317723-2G'
-password = 'sbnrsgtc'
+ssid = 'YOUR WiFi NAME HERE'
+password = 'YOUR WiFi PASSWORD HERE'
 
 def connect():
     #connect to WLAN
@@ -50,15 +50,12 @@ def webpage(temp, hum):
               <h1>BME280 Pi Pico W Weather Station</h1>
               <table><tr><th>Parameters</th><th>Value</th></tr>
               <tr><td>Temperature</td><td><span class="sensor">""" + "{}C".format(temp) + """</span></td></tr>
-              <tr><td>Pressure</td><td><span class="sensor"> Pressure </span></td></tr>
               <tr><td>Humidity</td><td><span class="sensor">""" + "{:.02f}%".format(hum) + """</span></td></tr> 
               </html>"""
     return html
 
 def serve(connection):
-    led = LED(13)
     sensor = dht.DHT22(Pin(2))   
-    temperature = 0
     while True:
         client = connection.accept()[0]
         request = client.recv(1024)
@@ -67,21 +64,12 @@ def serve(connection):
             request = request.split()[1]
         except IndexError:
             pass
-        if request == '/lighton?':
-            pico_led.on()
-            state = 'ON'
-        elif request == '/lightoff?':
-            pico_led.off()
-            state = 'OFF'
+        pico_led.on()
         sensor.measure()
         temp = sensor.temperature()
         hum = sensor.humidity()
-        pico_led.on()
-        led.on()
-        sleep(0.5)
         pico_led.off()
-        led.off()
-        sleep(0.5)
+        sleep(2)
         html = webpage(temp, hum)
         client.send(html)
         client.close()
